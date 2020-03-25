@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input {
+    border: none;
+}
+
+ul {
+    list-style: none;
+}
+
+button , input{ 
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    &:visited{
+        color: black;
+    }
+}
