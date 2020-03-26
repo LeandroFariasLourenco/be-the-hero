@@ -1,12 +1,12 @@
-import React from "react";
-import Logon from "./Logon/index";
+import React from 'react';
+import Routes from './../routes/routes';
 
 const App = () => {
-    return (
-        <>
-            <Logon/>
-        </>
-    )
+	return (
+		<>
+			<Routes />
+		</>
+	)
 }
 
 export default App;

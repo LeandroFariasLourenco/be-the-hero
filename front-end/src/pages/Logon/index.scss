@@ -1,12 +1,7 @@
 .logon {
-  width: 100%;
-  max-width: 1120px;
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+  @extend %container;
+  justify-content: space-between;
+  
   &__container {
     width: 100%;
     max-width: 350px;
@@ -25,21 +20,7 @@
       }
       
       &__forgot {
-        display: flex;
-        align-items: center;
-        margin-top: 40px;
-        color: #41414d;
-        font-size: 18px;
-        font-weight: 700;
-        transition: opacity 0.2s;
-        svg {
-          margin-right: 8px;
-        }
-        
-        &:hover {
-          opacity: 0.8;
-          transition: opacity 0.2;
-        }
+        @extend %link;
       }
     }
   }

@@ -1,5 +1,6 @@
 import React from 'react';
-import { FiLogIn } from 'react-icons/fi'
+import { FiLogIn } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import heroesImg from './../../assets/heroes.png';
 import logoImg from './../../assets/logo.svg';
 
@@ -11,7 +12,7 @@ const Logon = () => {
         <form className="logon__container__form">
           <h1 className="logon__container__form__title">
             Faça seu logon
-                    </h1>
+          </h1>
           <input
             type="text"
             placeholder="Sua ID"
@@ -19,11 +20,11 @@ const Logon = () => {
           />
           <button className="logon__container__form__submit" type="submit">
             Entrar
-                    </button>
-          <a href="/register" className="logon__container__form__forgot">
+          </button>
+          <Link to="/register" className="logon__container__form__forgot">
             <FiLogIn size={16} color="E02041" />
-                        Não tenho cadastro
-                    </a>
+              Não tenho cadastro
+          </Link>
         </form>
       </div>
       <img className="logon__banner" src={heroesImg} alt="heroes" />
