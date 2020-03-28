@@ -23,9 +23,9 @@ export default StyleSheet.create({
   },
 
   containerIncidentTopic: {
+    fontWeight: 'bold',
     fontSize: 14,
-    color: '#41414d',
-    fontWeight: 'bold'
+    color: '#41414d'
   },
 
   containerIncidentContent: {

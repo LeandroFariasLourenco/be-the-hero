@@ -1,16 +1,33 @@
 import React from 'react';
 import logoImg from './../../assets/logo.png';
-import { View, Image, Text , TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity, Linking } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import * as MailComposer from 'expo-mail-composer';
 import { default as s } from './styles';
 
 const Details = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation(),
+    route = useRoute(),
+    incident = route.params.incident,
+    message = `Olá ${incident.DS_NOME}, estou entrando em contato porque gostaria de ajudar no caso ${incident.DS_TITULO} com o valor de `;
 
   function handleBackButton() {
     navigation.navigate('incident');
   }
+
+  function sendWhatsapp() {
+    Linking.openURL(`whatsapp://send?phone=${'5511983732412'}&text=${message}`);
+  }
+
+  function sendEmail() {
+    MailComposer.composeAsync({
+      subject: `Herói do caso: ${incident.DS_TITULO}`,
+      recipients: [incident.DS_EMAIL],
+      body: message
+    })
+  }
+
 
   return (
     <View style={s.container}>
@@ -22,14 +39,20 @@ const Details = () => {
       </View>
 
       <View style={s.containerIncident}>
-        <Text style={s.containerIncidentTopic, { marginTop: 0 }}>ONG:</Text>
-        <Text style={s.containerIncidentContent}>APAD</Text>
+        <Text style={[s.containerIncidentTopic, { marginTop: 0 }]}>ONG:</Text>
+        <Text style={s.containerIncidentContent}>{incident.DS_NOME}</Text>
+
+        <Text style={s.containerIncidentTopic}>LOCAL:</Text>
+        <Text style={s.containerIncidentContent}>{incident.DS_CIDADE}-{incident.DS_UF}</Text>
 
         <Text style={s.containerIncidentTopic}>CASO:</Text>
-        <Text style={s.containerIncidentContent}>AAA</Text>
+        <Text style={s.containerIncidentContent}>{incident.DS_DESCRICAO}</Text>
 
         <Text style={s.containerIncidentTopic}>VALOR:</Text>
-        <Text style={s.containerIncidentContent}>R$190</Text>
+        <Text style={s.containerIncidentContent}>{Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        }).format(incident.VL_CUSTO)}</Text>
       </View>
 
       <View style={s.contactBox}>
@@ -43,13 +66,13 @@ const Details = () => {
           >
             <TouchableOpacity
               style={s.contactBoxActionsWrapperButton}
-              onPress={() => { }}>
+              onPress={sendWhatsapp}>
               <Text style={s.contactBoxActionsText}>Whatsapp</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={s.contactBoxActionsWrapperButton}
-              onPress={() => { }}>
+              onPress={sendEmail}>
               <Text style={s.contactBoxActionsText}>Email</Text>
             </TouchableOpacity>
           </View>
