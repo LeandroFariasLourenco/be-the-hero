@@ -1,10 +1,10 @@
-const crypto = require('crypto'),
+const generateUniqueId = require('./../utils/generateUniqueId'),
     connect = require('./../database/connection');
 
 module.exports = {
     async post(request, response) {
         const { nome, email, telefone, cidade, uf } = request.body,
-            id = crypto.randomBytes(4).toString('HEX');
+            id = generateUniqueId();
 
         await connect('T_HERO_ONGS').insert({
             ID_CODIGO: id,
